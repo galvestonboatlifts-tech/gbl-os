@@ -170,18 +170,68 @@ export default function App() {
     )
   }
 
-  function customersPage() {
-    return <><Toolbar add="Customer" onAdd={() => setEditor({ type: 'customer', row: {} })} />
-      <div className="cards">{records.customers.map((x) => (
-        <article className="card" key={x.id}>
-          <div className="between">
-            <div><h3>{x.name}</h3><div className="small">{x.phone} · {x.email}</div></div>
-            <div className="actions"><button className="secondary" onClick={() => setEditor({ type: 'customer', row: x })}>Edit</button><button className="danger" onClick={() => remove('customers', x.id)}>Delete</button></div>
-          </div>
-          <p>{x.notes}</p>
-        </article>
-      ))}{!records.customers.length && <Empty>No customers</Empty>}</div></>
-  }
+ function customersPage() {
+  return (
+    <>
+      <Toolbar
+        add="Customer"
+        onAdd={() => setEditor({ type: 'customer', row: {} })}
+      />
+
+      <div className="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Phone</th>
+              <th>Email</th>
+              <th>Preferred Contact</th>
+              <th>Billing Address</th>
+              <th></th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {records.customers.map((x) => (
+              <tr key={x.id}>
+                <td>
+                  <b>{x.name}</b>
+                </td>
+                <td>{x.phone || '—'}</td>
+                <td>{x.email || '—'}</td>
+                <td>{x.preferred_contact || '—'}</td>
+                <td>{x.billing_address || '—'}</td>
+                <td>
+                  <div className="actions">
+                    <button
+                      className="secondary"
+                      onClick={() =>
+                        setEditor({ type: 'customer', row: x })
+                      }
+                    >
+                      Edit
+                    </button>
+
+                    <button
+                      className="danger"
+                      onClick={() => remove('customers', x.id)}
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+
+        {!records.customers.length && (
+          <Empty>No customers</Empty>
+        )}
+      </div>
+    </>
+  )
+}
 
   function propertiesPage() {
     return <><Toolbar add="Property" onAdd={() => setEditor({ type: 'property', row: {} })} />
