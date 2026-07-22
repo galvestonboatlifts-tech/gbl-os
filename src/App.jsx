@@ -2,11 +2,12 @@ import React, { useEffect, useMemo, useState } from 'react'
 import { supabase, isConfigured } from './lib/supabase'
 import { money, dateText, today, id } from './lib/utils'
 import { Badge, Empty, Field, Metric, Modal, SelectField } from './components/UI'
-
+import BoatLiftsModule from './features/boatLifts/BoatLiftsModule'
 const modules = [
   ['dashboard', 'Dashboard'],
   ['customers', 'Customers'],
   ['properties', 'Properties'],
+  ['boat-lifts', 'Boat Lifts'],
   ['estimates', 'Estimates'],
   ['jobs', 'Jobs'],
   ['invoices', 'Invoices'],
@@ -17,7 +18,7 @@ const modules = [
 ]
 
 const emptyData = {
-  customers: [], properties: [], estimates: [], jobs: [],
+  customers: [], properties: [],boat_lifts: [], estimates: [], jobs: [],
   invoices: [], inventory: [], employees: [], maintenance: [],
 }
 
@@ -245,7 +246,7 @@ export default function App() {
   }
 
   const views = {
-    dashboard, customers: customersPage, properties: propertiesPage, estimates: estimatesPage,
+    dashboard, customers: customersPage, properties: propertiesPage,'boat-lifts': BoatLiftsModule, estimates: estimatesPage,
     jobs: jobsPage, invoices: invoicesPage, inventory: inventoryPage, employees: employeesPage,
     maintenance: maintenancePage, reports: reportsPage,
   }
