@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react'
-import { supabase, isConfigured } from './lib/supabase'
+import { supabase, isConfigured } from "./lib/supabase";
 import { money, dateText, today, id } from './lib/utils'
 import { Badge, Empty, Field, Metric, Modal, SelectField } from './components/UI'
 
